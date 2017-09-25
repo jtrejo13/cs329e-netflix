@@ -20,13 +20,19 @@ def create_cache(filename):
     returns a dictionary after loading the file or pulling the file from the public_html page
     """
     cache = {}
-    filePath = "/u/fares/public_html/netflix-caches/" + filename
+    filePath = '/u/fares/public_html/netflix-caches/' + filename
 
-    if path.isfile(filePath):
+    if path.isfile(filename):                   #if file in my local computer
+        print('cache found locally')
+        with open(filename, "rb") as f:
+            cache = pickle.load(f)
+    elif path.isfile(filePath):                 #else if file in cs computer
+        print('cache found in cs computers')
         with open(filePath, "rb") as f:
             cache = pickle.load(f)
-    else:
-        webAddress = "http://www.cs.utexas.edu/users/fares/netflix-caches/" + \
+    else:                                       #else retreive from web
+        print('cache retreived from web')
+        webAddress = 'http://www.cs.utexas.edu/users/fares/netflix-caches/' + \
             filename
         bytes = get(webAddress).content
         cache = pickle.loads(bytes)
@@ -35,18 +41,20 @@ def create_cache(filename):
 
 
 AVERAGE_RATING = 3.60428996442
+YEAR_BY_MOVIE_ID = create_cache(
+    'JT26983-MovieYearByMovieID.pickle')
+print('success YEAR_BY_MOVIE_ID')
+AVERAGE_MOVIE_RATING_BY_RELEASE_YEAR = create_cache(
+    'JT26983-AvgMovieRatingsByReleaseYear.pickle')
+print('success AVERAGE_MOVIE_RATING_BY_RELEASE_YEAR')
+AVERAGE_MOVIE_RATING_BY_MOVIE_ID = create_cache(
+    'JT26983-AvgMovieRatingByMovieID.pickle')
+print('success AVERAGE_MOVIE_RATING_BY_MOVIE_ID')
+AVERAGE_RATING_BY_CUST_ID_AND_REL_YEAR = create_cache(
+    'JT26983-AvgRatingByCustomerIDAndReleaseYear.pickle')
+print('success AVERAGE_RATING_BY_CUST_ID_AND_REL_YEAR')
 ACTUAL_CUSTOMER_RATING = create_cache(
-    "cache-actualCustomerRating.pickle")
-AVERAGE_MOVIE_RATING_PER_YEAR = create_cache(
-    "cache-movieAverageByYear.pickle")
-YEAR_OF_RATING = create_cache("cache-yearCustomerRatedMovie.pickle")
-CUSTOMER_AVERAGE_RATING_YEARLY = create_cache(
-    "cache-customerAverageRatingByYear.pickle")
-
-
-actual_scores_cache ={10040: {2417853: 1, 1207062: 2, 2487973: 3}, 10041: {2417853: 1, 1207062: 2, 2487973: 3}}
-movie_year_cache = {10040: 1990, 10041: 1995}
-decade_avg_cache = {1990: 2.4, 1995: 2.4}
+    "JT26983-ActualRatingByCustomerIDAndMovieID.pickle")
 
 # ------------
 # netflix_eval
@@ -55,7 +63,6 @@ decade_avg_cache = {1990: 2.4, 1995: 2.4}
 def netflix_eval(reader, writer) :
     predictions = []
     actual = []
-
     # iterate throught the file reader line by line
     for line in reader:
     # need to get rid of the '\n' by the end of the line
@@ -64,17 +71,19 @@ def netflix_eval(reader, writer) :
         if line[-1] == ':':
 		# It's a movie
             current_movie = line.rstrip(':')
-            pred = movie_year_cache[int(current_movie)]
-            pred = (pred // 10) *10
-            prediction = decade_avg_cache[pred]
+            release_year = YEAR_BY_MOVIE_ID[int(current_movie)]
+            avg_movie_rating = AVERAGE_MOVIE_RATING_BY_MOVIE_ID[int(current_movie)]
+            avg_rating_release_year = AVERAGE_MOVIE_RATING_BY_RELEASE_YEAR[int(release_year)]
             writer.write(line)
             writer.write('\n')
         else:
 		# It's a customer
             current_customer = line
+            customer_avg_rating = AVERAGE_RATING_BY_CUST_ID_AND_REL_YEAR[(int(current_customer), int(release_year))]
+            prediction = avg_movie_rating + (customer_avg_rating - avg_movie_rating)
             predictions.append(prediction)
-            actual.append(actual_scores_cache[int(current_movie)][int(current_customer)])
-            writer.write(str(prediction)) 
+            actual.append(ACTUAL_CUSTOMER_RATING[int(current_customer), int(current_movie)])
+            writer.write(str(prediction)[:4]) 
             writer.write('\n')	
     # calculate rmse for predications and actuals
     rmse = sqrt(mean(square(subtract(predictions, actual))))

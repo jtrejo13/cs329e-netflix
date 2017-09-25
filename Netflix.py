@@ -80,7 +80,7 @@ def netflix_eval(reader, writer) :
 		# It's a customer
             current_customer = line
             customer_avg_rating = AVERAGE_RATING_BY_CUST_ID_AND_REL_YEAR[(int(current_customer), int(release_year))]
-            prediction = avg_movie_rating + (customer_avg_rating - avg_movie_rating)
+            prediction = (avg_movie_rating + customer_avg_rating) / 2
             predictions.append(prediction)
             actual.append(ACTUAL_CUSTOMER_RATING[int(current_customer), int(current_movie)])
             writer.write(str(prediction)[:4]) 

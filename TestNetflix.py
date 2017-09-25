@@ -9,6 +9,7 @@ from math import sqrt
 from io import StringIO
 from numpy import sqrt, square, mean, subtract
 
+
 # -----------
 # TestNetflix
 # -----------
@@ -20,26 +21,25 @@ class TestNetflix (TestCase):
     # ----
 
     def test_eval_1(self):
-        r = StringIO("1:\n30878\n2647871\n1283744\n2488120\n")
+        r = StringIO("1000:\n2326571\n977808\n1010534\n1861759\n")
         w = StringIO()
         netflix_eval(r, w)
         self.assertEqual(
-            w.getvalue(), "1:\n3.45\n2.88\n3.75\n4.57\n0.75\n")
+            w.getvalue(), "1000:\n3.49\n2.94\n2.64\n4.14\n0.59\n")
 
-    # def test_eval_2(self):
-    #     r = StringIO("10040:\n2417853\n1207062\n2487973\n10041:\n2417853\n1207062\n2487973\n")
-    #     w = StringIO()
-    #     netflix_eval(r, w)
-    #     self.assertEqual(
-    #         w.getvalue(), "10040:\n2.4\n2.4\n2.4\n10041:\n2.4\n2.4\n2.4\n0.90\n")
+    def test_eval_2(self):
+        r = StringIO("1000:\n2326571\n977808\n1010534\n1861759\n10:\n1952305\n1531863\n")
+        w = StringIO()
+        netflix_eval(r, w)
+        self.assertEqual(
+            w.getvalue(), "1000:\n3.49\n2.94\n2.64\n4.14\n10:\n3.22\n3.18\n0.49\n")
 
-    #Empty Input?
-    # def test_eval_2(self):
-    #     r = StringIO("10040:\n")
-    #     w = StringIO()
-    #     netflix_eval(r, w)
-    #     self.assertEqual(
-    #         w.getvalue(), "10040:\nnan\n")
+    def test_eval_3(self):
+        r = StringIO("10003:\n1515111\n")
+        w = StringIO()
+        netflix_eval(r, w)
+        self.assertEqual(
+            w.getvalue(), "10003:\n2.79\n0.20\n")
 
 # ----
 # main

@@ -1,11 +1,20 @@
-.
+...
 ----------------------------------------------------------------------
-Ran 1 test in 0.000s
+Ran 3 tests in 0.002s
 
 OK
+cache found locally
+success YEAR_BY_MOVIE_ID
+cache found locally
+success AVERAGE_MOVIE_RATING_BY_RELEASE_YEAR
+cache found locally
+success AVERAGE_MOVIE_RATING_BY_MOVIE_ID
+cache found locally
+success AVERAGE_RATING_BY_CUST_ID_AND_REL_YEAR
+cache found locally
 Name             Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------
-Netflix.py          27      0      4      0   100%
-TestNetflix.py      13      0      0      0   100%
+Netflix.py          52      8      8      1    82%   29-38, 25->29
+TestNetflix.py      23      0      0      0   100%
 ------------------------------------------------------------
-TOTAL               40      0      4      0   100%
+TOTAL               75      8      8      1    87%

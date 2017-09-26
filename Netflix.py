@@ -61,6 +61,28 @@ ACTUAL_CUSTOMER_RATING = create_cache(
 # ------------
 
 def netflix_eval(reader, writer) :
+    """netflix_eval takes in data from the Netflix Prize (http://www.cs.utexas.edu/users/fares/netflix/README), 
+    composed of movies and customer id's. netflix_eval predicts the rating each customer would give their corresponding movie
+    and calculates the error (RSME) between the predicted rating and the actual rating for all it's predictions
+
+    Args:
+        reader  (stdin): Data from the netflix prize problem
+        writer (stdout): Predictions and RMSE
+
+    Example:
+        Input Data:
+            10040:  # movie
+            2417853 # customer id
+            1207062
+            2487973
+
+        Program Output:
+            10040:  # movie
+            2.4     # prediction
+            2.4    
+            2.4
+            0.90    # RMSE
+    """
     predictions = []
     actual = []
     # iterate throught the file reader line by line
@@ -79,13 +101,19 @@ def netflix_eval(reader, writer) :
         else:
 		# It's a customer
             current_customer = line
-            customer_avg_rating = AVERAGE_RATING_BY_CUST_ID_AND_REL_YEAR[(int(current_customer), int(release_year))]
+            key = (int(current_customer) , int(release_year))
+            if key in AVERAGE_RATING_BY_CUST_ID_AND_REL_YEAR:
+                customer_avg_rating = AVERAGE_RATING_BY_CUST_ID_AND_REL_YEAR[key]
+            else:
+                customer_avg_rating = avg_movie_rating
             prediction = (avg_movie_rating + customer_avg_rating) / 2
+            assert prediction >= 0
             predictions.append(prediction)
             actual.append(ACTUAL_CUSTOMER_RATING[int(current_customer), int(current_movie)])
             writer.write(str(prediction)[:4]) 
             writer.write('\n')	
     # calculate rmse for predications and actuals
     rmse = sqrt(mean(square(subtract(predictions, actual))))
+    assert rmse >= 0
     writer.write(str(rmse)[:4] + '\n')
 

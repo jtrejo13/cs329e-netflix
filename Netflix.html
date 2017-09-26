@@ -30,7 +30,27 @@
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt><a name="-create_cache"><strong>create_cache</strong></a>(filename)</dt><dd><tt>filename&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;cache&nbsp;file&nbsp;to&nbsp;load<br>
 returns&nbsp;a&nbsp;dictionary&nbsp;after&nbsp;loading&nbsp;the&nbsp;file&nbsp;or&nbsp;pulling&nbsp;the&nbsp;file&nbsp;from&nbsp;the&nbsp;public_html&nbsp;page</tt></dd></dl>
- <dl><dt><a name="-netflix_eval"><strong>netflix_eval</strong></a>(reader, writer)</dt></dl>
+ <dl><dt><a name="-netflix_eval"><strong>netflix_eval</strong></a>(reader, writer)</dt><dd><tt>netflix_eval&nbsp;takes&nbsp;in&nbsp;data&nbsp;from&nbsp;the&nbsp;Netflix&nbsp;Prize&nbsp;(<a href="http://www.cs.utexas.edu/users/fares/netflix/README">http://www.cs.utexas.edu/users/fares/netflix/README</a>),&nbsp;<br>
+composed&nbsp;of&nbsp;movies&nbsp;and&nbsp;customer&nbsp;id's.&nbsp;netflix_eval&nbsp;predicts&nbsp;the&nbsp;rating&nbsp;each&nbsp;customer&nbsp;would&nbsp;give&nbsp;their&nbsp;corresponding&nbsp;movie<br>
+and&nbsp;calculates&nbsp;the&nbsp;error&nbsp;(RSME)&nbsp;between&nbsp;the&nbsp;predicted&nbsp;rating&nbsp;and&nbsp;the&nbsp;actual&nbsp;rating&nbsp;for&nbsp;all&nbsp;it's&nbsp;predictions<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;reader&nbsp;&nbsp;(stdin):&nbsp;Data&nbsp;from&nbsp;the&nbsp;netflix&nbsp;prize&nbsp;problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp;writer&nbsp;(stdout):&nbsp;Predictions&nbsp;and&nbsp;RMSE<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Input&nbsp;Data:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10040:&nbsp;&nbsp;#&nbsp;movie<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2417853&nbsp;#&nbsp;customer&nbsp;id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1207062<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2487973<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Program&nbsp;Output:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10040:&nbsp;&nbsp;#&nbsp;movie<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;prediction<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.4&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.90&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;RMSE</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
@@ -39,10 +59,10 @@ returns&nbsp;a&nbsp;dictionary&nbsp;after&nbsp;loading&nbsp;the&nbsp;file&nbsp;o
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>ACTUAL_CUSTOMER_RATING</strong> = {(6, 501): 3, (6, 658): 3, (6, 825): 3, (7, 285): 5, (7, 6408): 5, (7, 8393): 3, (7, 9217): 5, (7, 14759): 3, (8, 1144): 4, (8, 1202): 5, ...}<br>
-<strong>AVERAGE_MOVIE_RATING_BY_MOVIE_ID</strong> = {1: 3.749542961608775, 2: 3.5586206896551724, 3: 3.6411530815109345, 4: 2.73943661971831, 5: 3.9192982456140353, 6: 3.084396467124632, 7: 2.129032258064516, 8: 3.1898054996646548, 9: 2.6210526315789475, 10: 3.180722891566265, ...}<br>
-<strong>AVERAGE_MOVIE_RATING_BY_RELEASE_YEAR</strong> = {0: 2.7491166077738516, 1896: 3.6776315789473686, 1909: 2.7889908256880735, 1914: 2.9963636363636366, 1915: 3.020710973724884, 1916: 3.5005378271782, 1917: 3.4259818731117826, 1918: 3.230769230769231, 1919: 3.6225300468527193, 1920: 3.791682318218406, ...}<br>
+<strong>AVERAGE_MOVIE_RATING_BY_MOVIE_ID</strong> = {1: 4.217391304347826, 2: 4.1, 3: 3.75, 4: 3.5, 5: 3.984375, 6: 3.1944444444444446, 7: 2.6666666666666665, 8: 3.3385579937304075, 9: 3.5, 10: 3.0, ...}<br>
+<strong>AVERAGE_MOVIE_RATING_BY_RELEASE_YEAR</strong> = {0: 2.619047619047619, 1896: 4.0, 1909: 2.0, 1915: 3.0714285714285716, 1916: 3.8, 1917: 3.25, 1918: 3.0, 1919: 3.610169491525424, 1920: 4.193939393939394, 1921: 3.7419354838709675, ...}<br>
 <strong>AVERAGE_RATING</strong> = 3.60428996442<br>
-<strong>AVERAGE_RATING_BY_CUST_ID_AND_REL_YEAR</strong> = {(6, 1935): 4.0, (6, 1936): 3.0, (6, 1938): 3.0, (6, 1939): 3.5, (6, 1940): 4.0, (6, 1941): 3.0, (6, 1943): 4.0, (6, 1944): 3.0, (6, 1946): 4.0, (6, 1948): 4.0, ...}<br>
+<strong>AVERAGE_RATING_BY_CUST_ID_AND_REL_YEAR</strong> = {(6, 1975): 3.0, (6, 1983): 3.0, (6, 1991): 3.0, (7, 1981): 5.0, (7, 1987): 5.0, (7, 1997): 5.0, (7, 2002): 3.0, (7, 2004): 3.0, (8, 1983): 5.0, (8, 1991): 4.0, ...}<br>
 <strong>YEAR_BY_MOVIE_ID</strong> = {1: 2003, 2: 2004, 3: 1997, 4: 1994, 5: 2004, 6: 1997, 7: 1992, 8: 2004, 9: 1991, 10: 2001, ...}<br>
 <strong>sqrt</strong> = &lt;ufunc 'sqrt'&gt;<br>
 <strong>square</strong> = &lt;ufunc 'square'&gt;<br>

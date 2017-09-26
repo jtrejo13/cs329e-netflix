@@ -8,3 +8,5 @@ Icon?
 RunNetflix.tmp
 TestNetflix.tmp
 *.pickle
+probe.txt
+probe.tmp

@@ -110,8 +110,8 @@ def netflix_eval(reader, writer) :
             assert prediction >= 0
             predictions.append(prediction)
             actual.append(ACTUAL_CUSTOMER_RATING[int(current_customer), int(current_movie)])
-            writer.write(str(prediction)[:4]) 
-            writer.write('\n')	
+            writer.write("{0:.2f}".format(round(prediction, 2))) 
+            writer.write('\n')
     # calculate rmse for predications and actuals
     rmse = sqrt(mean(square(subtract(predictions, actual))))
     assert rmse >= 0

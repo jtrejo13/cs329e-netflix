@@ -1,3 +1,87 @@
+commit 8cc49a0f567ff21bfa04a7786402e6c1e4aa767c
+Author: Juan <jtrj33@gmail.com>
+Date:   Wed Sep 27 19:49:03 2017 -0500
+
+    Update TestNetflix.py to reflect that netflix_eval consistently outputs two decimal places
+
+commit 370ea6e3edb24af06841af1916391fbc3cf1579b
+Author: Juan <jtrj33@gmail.com>
+Date:   Wed Sep 27 19:43:18 2017 -0500
+
+    Update Netflix.out to output ratings with two decimal places
+
+commit 7470a2db2ce9c38c8de4bf1027009bb8182884dc
+Author: Juan <jtrj33@gmail.com>
+Date:   Tue Sep 26 17:48:07 2017 -0500
+
+    Update documentation and add assertions to Netflix.py. Add safeguard for key not in dic to Netflix.py. Update TestNetflix.py unit tests.
+
+commit a3a51e9360f4fc4af4668a91663780a901f5f852
+Author: Juan <jtrj33@gmail.com>
+Date:   Tue Sep 26 16:02:25 2017 -0500
+
+    Update .gitignore to include probe.txt
+
+commit 1924786c424416326483ca4802a12b11623be64b
+Author: Juan <jtrj33@gmail.com>
+Date:   Tue Sep 26 12:37:58 2017 -0500
+
+    Update Acceptance tests in RunNetflix.in and RunNetflix.out
+
+commit 1ef6c724bf7c1d8ee500fdd5ade8394c0018aba7
+Author: Juan <jtrj33@gmail.com>
+Date:   Tue Sep 26 11:20:06 2017 -0500
+
+    Comment out print statements in Netflix.py. Update Netflix.html
+
+commit f2a3fe4cc7ecc229a83c8cf0188fccf56adbc67d
+Author: Juan <jtrj33@gmail.com>
+Date:   Mon Sep 25 17:50:10 2017 -0500
+
+    Update RunNetflix.in and RunNetflix.out
+
+commit e0c3cf0d1e942bad462c6d792e5e9e998169702c
+Author: Juan <jtrj33@gmail.com>
+Date:   Mon Sep 25 16:42:59 2017 -0500
+
+    Add unit tests to TestNetflix.py. Update algorithm in Netflix.py. Update coverage report in TestNetflix.out
+
+commit 6097903466703dc58ae1fa2f0f15f4cc49da4b36
+Author: Juan <jtrj33@gmail.com>
+Date:   Mon Sep 25 15:28:39 2017 -0500
+
+    Update Netflix.py and TestNetflix.py to work with custom caches
+
+commit 9c9a5c99f183f98574e349a1fbab869496172c4e
+Author: Juan <jtrj33@gmail.com>
+Date:   Mon Sep 25 09:41:31 2017 -0500
+
+    Update .gitignore to include pickle files
+
+commit 812fc867f80daf80aefcce42156f49a2c01b3b8a
+Author: Juan <jtrj33@gmail.com>
+Date:   Thu Sep 21 19:33:18 2017 -0500
+
+    Remove tmp files from git. Update .gitignore
+
+commit 49d94d6ae3fe0db5210d49249756ba1ea5aa681c
+Author: Juan <jtrj33@gmail.com>
+Date:   Thu Sep 21 19:21:26 2017 -0500
+
+    Add unit test for multiple movies. Uncomment create_cash
+
+commit 4e35d30957702de48009e8d8f11e6b4272c8bfad
+Author: Juan <jtrj33@gmail.com>
+Date:   Thu Sep 21 16:24:11 2017 -0500
+
+    Run and pass first test
+
+commit 487b69912caf7b3e6089d23335c7d39073763d93
+Author: Juan <jtrj33@gmail.com>
+Date:   Thu Sep 21 16:23:20 2017 -0500
+
+    Updated .gitignore file
+
 commit 72e02ba1dc7537bd61bb8e35aebd0ae5daf19cd6
 Author: Juan <jtrj33@gmail.com>
 Date:   Tue Sep 19 15:14:42 2017 -0500
